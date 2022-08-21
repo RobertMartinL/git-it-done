@@ -1,9 +1,9 @@
+var repoNameEl = document.querySelector("#repo-name");
 var issueContainerEl = document.querySelector("#issues-container");
 var limitWarningEl = document.querySelector("#limit-warning");
 
 var getRepoIssues = function(repo) {
-    console.log(repo);
-
+    // format the github api url
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
 
     fetch(apiUrl).then(function(response) {
@@ -16,18 +16,11 @@ var getRepoIssues = function(repo) {
                 displayWarning(repo)
               }
             });
-          }
-        
-        // request was successful
-        if (response.ok) {
-          response.json().then(function(data) {
-            // pass response data to dom function
-            displayIssues(data);
-          });
         }
         else {
-          alert("There was a problem with your request!");
-        }
+            console.log(response);
+            alert("There was a problem with your request!");
+          }
         
       });
    
